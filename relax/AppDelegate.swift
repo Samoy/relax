@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         statusBarMenu.addItem(switchMenuItem)
         
         // 添加提醒时间菜单
-        let menuItem = NSMenuItem(title: "提醒时间", action: nil, keyEquivalent: "")
+        let menuItem = NSMenuItem(title: "提醒频率", action: nil, keyEquivalent: "")
         let subMenu = NSMenu()
         for time in times {
             let subMenuItem = NSMenuItem(title: time, action: #selector(changeDuration), keyEquivalent: "")
