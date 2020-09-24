@@ -3,7 +3,7 @@ if [[ -d "build" ]]; then
     rm -rf "build"
 fi
 xcodebuild
-if [[ ! -f build/Release/relax.app ]]; then
+if [[ ! -d build/Release/relax.app ]]; then
 	exit 1
 fi
 if [[ ! -d tmp ]]; then
