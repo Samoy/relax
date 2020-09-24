@@ -1,4 +1,6 @@
 # relax
+![Build](https://github.com/Samoy/relax/workflows/Build/badge.svg)
+
 休息一下吧
 
 ## 介绍
@@ -14,7 +16,7 @@
 
 ![install](/screenshots/install.png)
 
-2. 将安装包拖动到Applications目录下
+2. 将应用拖动到Applications目录下
 3. 打开启动台，点击应用图标
 
 ![startup](/screenshots/startup.png)
