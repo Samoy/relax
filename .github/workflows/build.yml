@@ -1,4 +1,4 @@
-name: Swift
+name: Build
 
 on:
   push:
@@ -12,6 +12,16 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    - uses: apple-actions/import-codesign-certs@v1
+      with:
+        p12-file-base64: ${{ secrets.KEYCHAIN_12 }}
+        p12-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+
     - uses: actions/checkout@v2
     - name: Build
       run: ./build.sh
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: relax.dmg
+        path: dist/relax.dmg

@@ -3,6 +3,9 @@ if [[ -d "build" ]]; then
     rm -rf "build"
 fi
 xcodebuild
+if [[ ! -f build/Release/relax.app ]]
+	exit 1
+fi
 if [[ ! -d tmp ]]; then
    mkdir tmp
 fi
