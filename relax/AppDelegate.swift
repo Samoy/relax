@@ -19,6 +19,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         initMenuBar()
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(startTimer), name: NSWorkspace.didWakeNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(stopTimer), name: NSWorkspace.willSleepNotification, object: nil)
+    }
+
+    @objc func startTimer() {
+        initTimer(durtaion: duration)
+    }
+    
+    @objc func stopTimer(){
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
     }
     
     fileprivate func initMenuBar() {
@@ -43,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             if time == "1小时" {
                 lastBarItem = subMenuItem
                 subMenuItem.state = .on
-                initTimer(durtaion: duration)
+                startTimer()
             }
             subMenu.addItem(subMenuItem)
         }
@@ -59,15 +72,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     
     @objc func switchTimer(sender:NSMenuItem){
         if sender.state == .on {
-            if timer != nil {
-                timer?.invalidate()
-                timer = nil
-            }
+            stopTimer()
             sender.state = .off
             return
         }
         if sender.state == .off {
-            initTimer(durtaion: duration)
+            startTimer()
             sender.state = .on
         }
     }
@@ -83,7 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         duration = getDuration(title: sender.title)
         desc = sender.title
         lastBarItem = sender
-        initTimer(durtaion: duration)
+        startTimer()
     }
     
     fileprivate func getDuration(title:String) -> Float {
